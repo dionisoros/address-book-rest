@@ -30,7 +30,7 @@ npm install
 npm run dev      
 ```
   ----
-###Open the client side (Angular9):
+### Open the client side (Angular9):
 Open a browser tab and type <b>localhost:4200</b>  
 Sing up a new user or <b>log in with this user credentials: 
 
