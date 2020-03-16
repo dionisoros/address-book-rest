@@ -13,7 +13,7 @@ import {delay} from "rxjs/operators";
 export class ContactListComponent implements OnInit, OnDestroy {
 
   contacts: Contact[] = [];
-  displayedColumns = ['firstName', 'lastName', 'email', 'country'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'country', 'createdAt', 'createdBy', 'updatedAt', 'updatedBy'];
   isLoadingContacts = true;
   private subscription: Subscription;
 

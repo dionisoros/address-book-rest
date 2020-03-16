@@ -31,6 +31,26 @@
     <ng-container matColumnDef="country">
       <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
       <mat-cell *matCellDef="let contact">{{contact.country || '-'}}</mat-cell>
+    </ng-container>   
+    
+    <ng-container matColumnDef="createdAt">
+      <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.createdAt | date:'medium' || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createdBy">
+      <mat-header-cell *matHeaderCellDef>Created by</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.createdBy || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedAt">
+      <mat-header-cell *matHeaderCellDef>Last updated</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.updatedAt | date:'medium' || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedBy">
+      <mat-header-cell *matHeaderCellDef>Updated by</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.updatedBy || '-'}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

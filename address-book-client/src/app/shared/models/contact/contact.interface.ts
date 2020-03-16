@@ -3,8 +3,12 @@ export interface ContactResponse {
   firstName: string,
   lastName: string,
   email: string,
-  country?: string,
-  image?: string
+  country: string,
+  createdAt?: Date;
+  updatedAt?: Date;
+  createdBy?: string;
+  updatedBy?: string;
+
 }
 
 export type ContactList = ContactResponse[];

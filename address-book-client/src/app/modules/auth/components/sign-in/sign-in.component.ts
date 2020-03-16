@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService, TokenResponse} from "../../../../shared/services/api/auth-service/auth.service";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {map, switchMap, switchMapTo} from "rxjs/operators";
+import {UserManagementService} from "../../../../shared/services/api/user-service/user-management.service";
+import {empty} from "rxjs";
 
 @Component({
   selector: 'app-sign-in',
@@ -21,10 +24,12 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private userService: UserManagementService,
     private notificationsService: NotificationsService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.signUpForm = this.initSignUpForm()
@@ -56,7 +61,7 @@ export class SignInComponent implements OnInit {
   signIn() {
     this.authService.signIn({username: this.signInObj.username.value, password: this.signInObj.password.value})
       .subscribe((tokenResponse: TokenResponse) => {
-        this.authService.setLocalUserInfo(tokenResponse);
+        this.authService.setLocalUserInfo(tokenResponse, this.signInObj.username.value);
         this.router.navigate([this.authService.redirectUrl ? this.authService.redirectUrl : '/contacts']);
         this.notificationsService.success('Logged in.');
       })

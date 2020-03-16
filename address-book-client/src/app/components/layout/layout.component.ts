@@ -15,6 +15,7 @@ export class LayoutComponent {
 
   signOut() {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userLoggedIn');
     this.router.navigate(['/sign-in']);
     this.notificationService.info('You are logged out')
   }

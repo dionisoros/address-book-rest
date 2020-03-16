@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {SharedModule} from "../../shared/shared.module";
 import {ContactsRoutingModule} from "./contacts-routing.module";
 import { ContactListComponent } from './components/contact-list/contact-list.component';
@@ -20,6 +20,9 @@ import {CustomConfirmDialogComponent} from "../../shared/components/custom-confi
     ContactsRoutingModule,
     SharedModule,
     FormsModule,
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class ContactsModule { }

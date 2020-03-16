@@ -65,21 +65,20 @@ export class ApiService {
   }
 
   private handleError(httpErrorRes: HttpErrorResponse) {
-    const serverErrMsg = (httpErrorRes && httpErrorRes.error)
-      && httpErrorRes.error.issue
-      && httpErrorRes.error.issue[0].error;
+    const httpErrMsg = (httpErrorRes && httpErrorRes.error) && httpErrorRes.error.issue && httpErrorRes.error.issue[0].error; // response.body error
+    const errorMsg = httpErrorRes.error && httpErrorRes.error.message; // throw new error
 
     if (httpErrorRes.status === 400) {
       // generic bad request, most likely failed backend validation
-      this.notificationsService.error(serverErrMsg);
+      this.notificationsService.error(httpErrMsg);
     } else if (httpErrorRes.status === 401) {
       this.router.navigate(['/sign-in']);
-      this.notificationsService.error(serverErrMsg, {title: 'Unauthorized'});
+      this.notificationsService.error(httpErrMsg, {title: 'Unauthorized'});
     } else if (httpErrorRes.status === 404) {
-      this.notificationsService.error(serverErrMsg, {title: 'Not found.'});
+      this.notificationsService.error(httpErrMsg, {title: 'Not found.'});
     } else {
       // 5xx - server errors
-      this.notificationsService.error(serverErrMsg, {title: 'An error occurred.'});
+      this.notificationsService.error(httpErrMsg ? httpErrMsg : errorMsg ? errorMsg : 'Server is not working.', {title: 'An error occurred.'});
     }
     console.error('Api error occurred:', httpErrorRes);
 

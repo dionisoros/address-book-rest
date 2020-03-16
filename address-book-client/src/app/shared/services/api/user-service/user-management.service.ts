@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {ApiService} from "../api.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {User, UserResponseInterface} from "../../../models/user/user.model";
+import {User} from "../../../models/user/user.model";
+import {UserResponseInterface} from "../../../models/user/user.interface";
 
 @Injectable({
   providedIn: 'root'

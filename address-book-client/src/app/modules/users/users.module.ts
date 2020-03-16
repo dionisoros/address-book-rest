@@ -22,9 +22,6 @@ import {UserManagementService} from "../../shared/services/api/user-service/user
   ],
   providers: [
     UserManagementService
-  ],
-  entryComponents: [
-    UserDialogComponent
   ]
 })
 export class UsersModule { }

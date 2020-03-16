@@ -21,6 +21,17 @@ router.get('/:id', async (ctx) => {
 });
 
 const createUser = async (user, response) => {
+    let findUser = await userStore.findOne({ username: user.username });
+    let findEmail = await userStore.findOne({email: user.email});
+
+    if (findUser) {
+        throw new Error('This username already exists!')
+    }
+
+    if (findEmail) {
+        throw new Error('This email already exists!')
+    }
+
     try {
         response.body = await userStore.insert(user);
         response.status = 201; // created

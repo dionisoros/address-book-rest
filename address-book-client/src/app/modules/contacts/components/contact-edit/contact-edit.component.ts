@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomConfirmDialogComponent} from "../../../../shared/components/custom-confirm-dialog/custom-confirm-dialog.component";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-contact-edit',
@@ -27,6 +28,7 @@ export class ContactEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private contactsService: ContactsService,
     private notificationsService: NotificationsService,
+    private datePipe: DatePipe,
     private matDialog: MatDialog,
     private formBuilder: FormBuilder) {
   }
@@ -56,7 +58,14 @@ export class ContactEditComponent implements OnInit, OnDestroy {
         return this.contactsService.getContactById(params.id);
       }), delay(500), takeUntil(this._unsubscribe)) // in order to simulate the mat spinner
       .subscribe((contact: Contact) => {
-        this.contactForm.setValue(new Contact(contact));
+        const setContractForm: {_id, firstName, lastName, email, country} = {
+          _id: contact._id,
+          firstName: contact.firstName,
+          lastName: contact.lastName,
+          email: contact.email,
+          country: contact.country,
+        };
+        this.contactForm.setValue(setContractForm);
         this.isLoading = false;
       }, () => {
         this.isLoading = false;
@@ -66,7 +75,13 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   }
 
   editContact() {
-    const contactForm = new Contact(this.contactForm.value);
+    const contactAudit = {
+      createdAt: this.datePipe.transform(new Date(), 'medium'),
+      updatedAt: this.datePipe.transform(new Date(), 'medium'),
+      createdBy: localStorage.getItem('userLoggedIn'),
+      updatedBy: localStorage.getItem('userLoggedIn')
+    };
+    const contactForm = new Contact({...this.contactForm.value, ...contactAudit});
     this.contactsService.updateContact(contactForm).subscribe((contact) => {
       this.router.navigate(['/contacts']);
       this.notificationsService.success(`${contact.firstName} updated.`)

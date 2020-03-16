@@ -32,7 +32,6 @@ export class UserDetailsComponent implements OnInit {
     this.user$ = this.route.params.pipe(
       distinctUntilChanged(),
       switchMap(params => {
-        console.log(params)
         return this.userService.getUserDetails(params.id);
       })
     );

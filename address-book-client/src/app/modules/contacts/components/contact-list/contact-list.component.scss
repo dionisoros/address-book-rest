@@ -23,7 +23,7 @@
     width: 100%;
 
     .mat-row {
-      $y: 10;
+      $y: 25;
       @for $i from 1 through $y {
         &:nth-child(#{$i}) {
           animation: move-in 0.5s ease-out ($i/5 + s);

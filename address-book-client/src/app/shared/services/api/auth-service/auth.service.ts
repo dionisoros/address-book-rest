@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "../api.service";
+import {Observable} from "rxjs";
 
 export interface TokenResponse {
   token: string
@@ -21,8 +22,9 @@ export class AuthService {
     return localStorage.getItem('authToken') !== null
   }
 
-  setLocalUserInfo(tokenResponse: TokenResponse) {
+  setLocalUserInfo(tokenResponse: TokenResponse, userLoggedIn?: string) {
     localStorage.setItem('authToken', tokenResponse.token);
+    localStorage.setItem('userLoggedIn', userLoggedIn)
   }
 
   getAuthorizationToken(): string {
