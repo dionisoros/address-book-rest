@@ -1,0 +1,57 @@
+<h1 class="align-center">Edit contact</h1>
+
+<mat-card class="form-card" *ngIf="!isLoading">
+  <mat-card-content>
+    <form class="flex-column" [formGroup]="contactForm">
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName">
+        <mat-error>
+          <span *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').touched">First Name required</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName">
+        <mat-error>
+          <span *ngIf="!contactForm.get('lastName').valid && contactForm.get('lastName').touched">Last Name required</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" email>
+        <mat-error>
+          <span *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched">Please enter a valid email</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               placeholder="Country"
+               [matAutocomplete]="auto"
+               formControlName="country">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let country of countryListFiltered | async" [value]="country">
+            <span>{{country}}</span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <span *ngIf="!contactForm.get('country').valid && contactForm.get('country').touched">Please select a country</span>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div class="flex-row justify-content-end">
+      <button type="submit" (click)="editContact()" mat-flat-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button type="button" (click)="removeContact()" mat-flat-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+

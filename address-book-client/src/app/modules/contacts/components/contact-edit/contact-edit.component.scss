@@ -1,0 +1,33 @@
+@import '../../../../../styles/variables';
+
+:host {
+  //Card Style
+  mat-card {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .mat-card-header-text{
+    margin: 0;
+  }
+
+  button{
+    margin-right: $spacer-15;
+
+    &:last-of-type{
+      margin-right: 0;
+    }
+  }
+
+  //Spinner Style
+  .mat-progress-spinner {
+    position: absolute;
+    top: calc((100% / 2) - 45px);
+    right: calc((100% / 2) - 45px);
+    z-index: 1;
+  }
+
+}

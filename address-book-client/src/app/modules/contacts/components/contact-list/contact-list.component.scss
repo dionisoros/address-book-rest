@@ -1,0 +1,51 @@
+:host {
+  .mat-progress-spinner {
+    position: absolute;
+    top: calc((100% / 2) - 45px);
+    right: calc((100% / 2) - 45px);
+    z-index: 1;
+  }
+
+  .mat-toolbar {
+    position: relative;
+    padding: 50px 40px;
+  }
+
+  .button-add {
+    margin-bottom: -40px;
+    position: absolute;
+    left: 40px;
+    top: 80px;
+    border-radius: 30px;
+  }
+
+  mat-table {
+    width: 100%;
+
+    .mat-row {
+      $y: 10;
+      @for $i from 1 through $y {
+        &:nth-child(#{$i}) {
+          animation: move-in 0.5s ease-out ($i/5 + s);
+          animation-fill-mode: both;
+        }
+      }
+
+      &:hover {
+        background-color: lightgray;
+
+      }
+    }
+  }
+}
+
+@keyframes move-in {   // keyframes animation move-in function (used for table rows)
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

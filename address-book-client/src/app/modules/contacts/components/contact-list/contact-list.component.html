@@ -1,0 +1,39 @@
+<mat-toolbar class="mat-elevation-z8">
+  <h1>Contacts</h1>
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <a mat-flat-button color="primary" class="button-add" [routerLink]="['add-new']">
+      <mat-icon>person_add</mat-icon>
+      Add new
+    </a>
+  </div>
+</mat-toolbar>
+
+<mat-spinner *ngIf="isLoadingContacts"></mat-spinner>
+
+<div class="padding-20">
+  <mat-table [dataSource]="contacts">
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.firstName || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.lastName || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.email || '-'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+      <mat-cell *matCellDef="let contact">{{contact.country || '-'}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let contact; columns: displayedColumns;" [routerLink]="[contact._id]" style="cursor: pointer"></mat-row>
+  </mat-table>
+</div>

@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Add user</h2>
+
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <label>
+      <input matInput placeholder="Email" (input)="onEmailChange($event.target.value)">
+    </label>
+    <div *ngIf="!validEmail" class="error-message">
+      <p>Invalid email address!</p>
+    </div>
+    <mat-error>
+      Invalid email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <label>
+      <input matInput placeholder="Username" [(ngModel)]="user.username">
+    </label>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <label>
+      <input matInput placeholder="Age" (input)="onAgeChange($event.target.value)">
+    </label>
+    <div *ngIf="!validAge" class="error-message">
+      <p>Invalid Age!</p>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <label>
+      <input matInput placeholder="Password for user" type="password" [(ngModel)]="user.password">
+    </label>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex-row justify-content-between">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()" [disabled]="!validEmail || !validAge">Save</button>
+</mat-dialog-actions>

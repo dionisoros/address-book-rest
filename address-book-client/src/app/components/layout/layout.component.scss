@@ -1,0 +1,33 @@
+:host {
+  height: 100vh;
+
+  mat-radio-group {
+    margin-right: 20px;
+    font-size: 12px;
+
+    mat-radio-button{
+      margin-right: 10px;
+    }
+
+    label{
+      margin-right: 5px ;
+    }
+  }
+
+  mat-sidenav-container {
+    height: calc(100% - 64px);
+  }
+
+  .mat-drawer {
+    min-width: 15%;
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+  :host {
+    mat-sidenav-container {
+      height: calc(100% - 56px);
+    }
+  }
+}

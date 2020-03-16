@@ -1,0 +1,8 @@
+@import '../../../../../styles/variables';
+
+.error-message {
+  p {
+    color: red;
+    font-size: $spacer-10;
+  }
+}

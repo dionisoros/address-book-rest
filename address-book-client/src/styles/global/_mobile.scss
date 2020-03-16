@@ -1,0 +1,12 @@
+@media screen and (max-width: 576px) {
+  .form-card {
+    min-width: initial;
+    max-width: initial;
+    display: flex;
+    width: auto;
+    margin: $spacer-20;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+}

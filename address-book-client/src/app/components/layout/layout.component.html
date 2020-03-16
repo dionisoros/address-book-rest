@@ -1,0 +1,45 @@
+<div fxLayout="column" fxFlex="100%" fxFlexFill [class]="theme">
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxFlexAlign="center">
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-icon-button>
+          <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <h1>Address book</h1>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-radio-group
+          aria-labelledby="radio-group-color"
+          class="example-radio-group" [(ngModel)]="theme">
+          <label>Color theme</label>
+          <mat-radio-button value="my-theme">cyan
+          </mat-radio-button>
+          <mat-radio-button value="my-theme-custom">purple
+          </mat-radio-button>
+        </mat-radio-group>
+        <button mat-button (click)="signOut()">
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" (click)="sidenav.toggle()">
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
+        <a mat-list-item [routerLink]="'/contacts/add-new'"> Add new contact </a>
+        <a mat-list-item [routerLink]="'/users'"> Users </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

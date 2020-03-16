@@ -1,0 +1,90 @@
+<div class="grid" [ngClass]="{'right-panel-active': fadeIn}">
+
+  <div class="grid-item sign-up-container">
+    <mat-card class="flex-column">
+      <h1>Create Account</h1>
+      <div class="social-container">
+      </div>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="FirstName" formControlName="firstName">
+          </label>
+        </mat-form-field>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="LastName" formControlName="lastName">
+          </label>
+        </mat-form-field>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Username" formControlName="username">
+          </label>
+          <mat-error *ngIf="signUpForm.get('username').touched && signUpForm.get('username').invalid">Invalid username!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Age" formControlName="age">
+          </label>
+        </mat-form-field>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Email" formControlName="email">
+          </label>
+          <mat-error *ngIf="signUpForm.get('email').touched && signUpForm.get('email').invalid">Invalid email!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <label>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+          </label>
+          <mat-error *ngIf="signUpForm.get('password').touched && signUpForm.get('password').invalid">Invalid password!</mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Sign up</button>
+        </mat-card-actions>
+      </form>
+
+    </mat-card>
+  </div>
+
+  <div class="grid-item sign-in-container">
+    <mat-card class="flex-column">
+      <h1>Sign in</h1>
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Username" [formControl]="signInObj.username" required>
+        </label>
+        <mat-error *ngIf="signInObj.username.invalid">Username required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Password" type="password" [formControl]="signInObj.password" required>
+        </label>
+        <mat-error *ngIf="signInObj.password.invalid">Password required</mat-error>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button mat-raised-button [disabled]="signInObj.username.invalid || signInObj.password.invalid"
+                (click)="signIn()" color="primary">Sign in
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button mat-raised-button color="primary" (click)="this.fadeIn = !this.fadeIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button mat-raised-button color="primary" (click)="this.fadeIn = !this.fadeIn">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+</div>
