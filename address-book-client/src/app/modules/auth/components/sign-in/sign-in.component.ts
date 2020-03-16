@@ -78,8 +78,6 @@ export class SignInComponent implements OnInit {
 
         this.notificationsService.success('Registration completed successfully. You can sign in now.');
         this.initSignUpForm();
-      }, () => {
-        this.notificationsService.error('Registration could not be done.');
       })
   }
 }

@@ -26,14 +26,14 @@ import {MatDialog} from "@angular/material/dialog";
 export class UserListComponent implements OnInit, OnDestroy {
   isLoadingUsers = true;
   users: User[] = [];
-  displayedColumns = ['username', 'firstName', 'email'];
+  displayedColumns = ['username', 'firstName', 'lastName', 'email'];
   usersSelected = false;
   private _usersUpdatedSubject: BehaviorSubject<null> = new BehaviorSubject<null>(null);
   private _unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private userService: UserManagementService,
-    private notificatonService: NotificationsService,
+    private notificatonsService: NotificationsService,
     private matDialog: MatDialog
   ) { }
 
@@ -46,7 +46,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.users = users;
         this.isLoadingUsers = false
       }, () => {
-        this.notificatonService.error('Could not get users', {title: 'Server error'});
+        this.notificatonsService.error('Could not get users', {title: 'Server error'});
         this.isLoadingUsers = false
       }),
       takeUntil(this._unsubscribe)
@@ -60,9 +60,10 @@ export class UserListComponent implements OnInit, OnDestroy {
         if (result) {
           return this.userService.postUser(result)
         }
-        return empty()
       }),
-      tap((user) => {
+      tap((user: User) => {
+        this.notificatonsService.success(` ${user.username} added.`);
+        this.isLoadingUsers = true;
         this._usersUpdatedSubject.next(null);
       })
     ).subscribe()

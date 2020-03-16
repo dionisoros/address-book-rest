@@ -9,6 +9,12 @@
       In this card you can only see details about the user that you have selected.
     </p>
     <mat-form-field class="full-width">
+      <input matInput placeholder="Email" disabled [value]="user.firstName || '-'">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Email" disabled [value]="user.lastName || '-'">
+    </mat-form-field>
+    <mat-form-field class="full-width">
       <input matInput placeholder="Age" disabled [value]="user.age || '-'">
     </mat-form-field>
     <mat-form-field class="full-width">

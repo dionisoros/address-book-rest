@@ -21,6 +21,18 @@
 
   <mat-form-field class="full-width">
     <label>
+      <input matInput placeholder="First Name" [(ngModel)]="user.firstName">
+    </label>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <label>
+      <input matInput placeholder="Last Name" [(ngModel)]="user.lastName">
+    </label>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <label>
       <input matInput placeholder="Age" (input)="onAgeChange($event.target.value)">
     </label>
     <div *ngIf="!validAge" class="error-message">

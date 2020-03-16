@@ -30,16 +30,12 @@ export class UserManagementService {
   }
 
   postUser(user: User): Observable<User> {
-    return this.apiService.post<User>('/users', user);
+    return this.apiService.post<User>('/users', user).pipe(
+      map((user: UserResponseInterface) => {
+        return new User(user)
+      })
+    )
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.apiService.put<User>(`/users/${user._id}`, user);
-  }
-
-
-  deleteUser(userId: string) {
-    return this.apiService.delete(`/users/${userId}`);
-  }
 
 }
