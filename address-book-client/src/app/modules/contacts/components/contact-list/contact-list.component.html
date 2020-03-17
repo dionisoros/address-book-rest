@@ -10,7 +10,7 @@
 
 <mat-spinner *ngIf="isLoadingContacts"></mat-spinner>
 
-<div class="padding-20" [hidden]="!contacts.data.length">  <!-- hidden -> workaround -->
+<div class="padding-30" [hidden]="!contacts.data.length">  <!-- hidden -> workaround -->
   <mat-table [dataSource]="contacts" matSort [@fade]="'in'">
 
     <ng-container matColumnDef="firstName">
@@ -53,11 +53,29 @@
       <mat-cell *matCellDef="let contact">{{contact.updatedBy || '-'}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Edit/Delete</mat-header-cell>
+      <mat-cell *matCellDef="let contact">
+        <a mat-flat-button color="primary" [routerLink]="[contact._id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button mat-flat-button color="warn" style="margin-right: 2rem">
+          <mat-icon (click)="removeContact(contact)">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let contact; columns: displayedColumns;" [routerLink]="[contact._id]" style="cursor: pointer"></mat-row>
+    <mat-row *matRowDef="let contact; columns: displayedColumns;"></mat-row>
   </mat-table>
 
   <div>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center"></mat-paginator>
   </div>
+</div>
+
+<div class="padding-30 align-center" *ngIf="!contacts.data.length">
+  <mat-card>
+    <p>No contacts found.</p>
+  </mat-card>
 </div>

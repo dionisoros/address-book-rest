@@ -91,7 +91,7 @@ export class ContactEditComponent implements OnInit, OnDestroy {
 
   removeContact() {
     const contactForm = this.contactForm.value;
-    const confirmDeleteDialog =  this.matDialog.open(CustomConfirmDialogComponent, {
+    const confirmDeleteDialog = this.matDialog.open(CustomConfirmDialogComponent, {
       data: {
         title: `Are you sure you want to delete ${contactForm.firstName}?`,
       }
