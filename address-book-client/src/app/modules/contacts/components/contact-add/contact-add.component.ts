@@ -46,7 +46,11 @@ export class ContactAddComponent implements OnInit {
     this.contactForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
-      'email': [null, Validators.required],
+      'email': [null, Validators.compose([
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(40),
+      ])],
       'country': [null, Validators.required],
     });
 

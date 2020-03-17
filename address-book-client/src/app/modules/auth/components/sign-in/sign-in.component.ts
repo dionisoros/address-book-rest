@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
     this.authService.signIn({username: this.signInObj.username.value, password: this.signInObj.password.value})
       .subscribe((tokenResponse: TokenResponse) => {
         this.authService.setLocalUserInfo(tokenResponse, this.signInObj.username.value);
-        this.router.navigate([this.authService.redirectUrl ? this.authService.redirectUrl : '/contacts']);
+        this.router.navigate(['/contacts']);
         this.notificationsService.success('Logged in.');
       })
   }

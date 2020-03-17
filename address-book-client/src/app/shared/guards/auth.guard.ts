@@ -19,9 +19,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.authService.redirectUrl = state.url;     // Store the attempted URL for redirecting
     this.router.navigate(['/sign-in']); // navigate to login page if the user is unauthorized
-
     return false;
   }
 

@@ -10,8 +10,6 @@ export interface TokenResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  redirectUrl: string;
-
   constructor(private apiService: ApiService) { }
 
   signIn(credentials: {username, password}) {

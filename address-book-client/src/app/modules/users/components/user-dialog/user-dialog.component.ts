@@ -13,25 +13,23 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class UserDialogComponent implements OnInit {
 
   user: User =  new User();
-  validEmail: boolean;
-  validAge: boolean;
+  validEmail: boolean = true;
+  validAge: boolean = true;
 
   constructor(private dialogRef: MatDialogRef<UserDialogComponent>) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   close() {
     this.dialogRef.close();
   }
 
-  onEmailChange(value: string) {
+  onEmailChange(value: string) { // custom validation (without material)
     this.validEmail = RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
     this.user.email = value;
-
   }
 
-  onAgeChange(value: string) {
+  onAgeChange(value: string) { // custom validation (without material)
     this.validAge = RegExp(/^[1-9][0-9]*$/).test(value);
     this.user.age = Number(value);
   }

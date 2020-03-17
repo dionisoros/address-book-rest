@@ -47,9 +47,17 @@ export class ContactEditComponent implements OnInit, OnDestroy {
     this.contactForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
       'lastName': [null, Validators.required],
-      'email': [null, Validators.required],
+      'email': [null, Validators.compose([
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(40),
+      ])],
       'country': [null, Validators.required],
       '_id': [null, Validators.required],
+      'createdAt': [null, Validators.required],
+      'updatedAt': [null, Validators.required],
+      'createdBy': [null, Validators.required],
+      'updatedBy': [null, Validators.required],
     });
 
     this.route.params.pipe(
@@ -58,14 +66,7 @@ export class ContactEditComponent implements OnInit, OnDestroy {
         return this.contactsService.getContactById(params.id);
       }), delay(500), takeUntil(this._unsubscribe)) // in order to simulate the mat spinner
       .subscribe((contact: Contact) => {
-        const setContractForm: {_id, firstName, lastName, email, country} = {
-          _id: contact._id,
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          email: contact.email,
-          country: contact.country,
-        };
-        this.contactForm.setValue(setContractForm);
+        this.contactForm.setValue(new Contact(contact));
         this.isLoading = false;
       }, () => {
         this.isLoading = false;
@@ -76,9 +77,7 @@ export class ContactEditComponent implements OnInit, OnDestroy {
 
   editContact() {
     const contactAudit = {
-      createdAt: this.datePipe.transform(new Date(), 'medium'),
       updatedAt: this.datePipe.transform(new Date(), 'medium'),
-      createdBy: localStorage.getItem('userLoggedIn'),
       updatedBy: localStorage.getItem('userLoggedIn')
     };
     const contactForm = new Contact({...this.contactForm.value, ...contactAudit});
