@@ -74,7 +74,7 @@
   </div>
 </div>
 
-<div class="padding-30 align-center" *ngIf="!contacts.data.length">
+<div class="padding-30 align-center" *ngIf="!contacts.data.length && !isLoadingContacts">
   <mat-card>
     <p>No contacts found.</p>
   </mat-card>
