@@ -10,7 +10,7 @@
 
 <mat-spinner *ngIf="isLoadingContacts"></mat-spinner>
 
-<div class="padding-20" *ngIf="contacts.data.length">
+<div class="padding-20" [hidden]="!contacts.data.length">  <!-- hidden -> workaround -->
   <mat-table [dataSource]="contacts" matSort [@fade]="'in'">
 
     <ng-container matColumnDef="firstName">
@@ -57,5 +57,7 @@
     <mat-row *matRowDef="let contact; columns: displayedColumns;" [routerLink]="[contact._id]" style="cursor: pointer"></mat-row>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center" [disabled]="!contacts.data.length"></mat-paginator>
+  <div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center"></mat-paginator>
+  </div>
 </div>

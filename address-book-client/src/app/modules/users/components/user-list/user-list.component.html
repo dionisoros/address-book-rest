@@ -10,7 +10,7 @@
 
 <mat-spinner *ngIf="isLoadingUsers"></mat-spinner>
 
-<div class="padding-20" *ngIf="users.data.length">
+<div class="padding-20" [hidden]="!users.data.length"> <!--hidden workaround -->
   <mat-card>
     <table mat-table [dataSource]="users" matSort [@fade]="'in'">
 
