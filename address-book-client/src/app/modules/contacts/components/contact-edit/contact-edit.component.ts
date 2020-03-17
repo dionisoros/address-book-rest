@@ -109,7 +109,8 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   }
 
   private filterCountries(value: string): string[] {
-    return this.countryList.filter(country => country.includes(value));
+    const filterValue = value.toLocaleLowerCase().trim();
+    return this.countryList.filter(country => country.toLocaleLowerCase().includes(filterValue));
   }
 
   ngOnDestroy() {
