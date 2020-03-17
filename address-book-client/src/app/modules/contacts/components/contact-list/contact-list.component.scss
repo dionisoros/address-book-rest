@@ -22,30 +22,30 @@
   mat-table {
     width: 100%;
 
-    .mat-row {
-      $y: 25;
-      @for $i from 1 through $y {
-        &:nth-child(#{$i}) {
-          animation: move-in 0.5s ease-out ($i/5 + s);
-          animation-fill-mode: both;
-        }
-      }
-
-      &:hover {
-        background-color: lightgray;
-
-      }
-    }
+    //.mat-row {
+    //  $y: 25;
+    //  @for $i from 1 through $y {
+    //    &:nth-child(#{$i}) {
+    //      animation: move-in 0.5s ease-out ($i/5 + s);
+    //      animation-fill-mode: both;
+    //    }
+    //  }
+    //
+    //  &:hover {
+    //    background-color: lightgray;
+    //
+    //  }
+    //}
   }
 }
 
-@keyframes move-in {   // keyframes animation move-in function (used for table rows)
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+//@keyframes move-in {   // keyframes animation move-in function (used for table rows)
+//  from {
+//    transform: translateY(50px);
+//    opacity: 0;
+//  }
+//  to {
+//    transform: translateY(0);
+//    opacity: 1;
+//  }
+//}

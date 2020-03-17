@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {delay, switchMap, takeUntil, tap} from "rxjs/operators";
 import {User} from "../../../../shared/models/user/user.model";
 import {trigger, style, animate, transition, state} from '@angular/animations';
@@ -7,6 +7,9 @@ import {BehaviorSubject, empty, Subject} from "rxjs";
 import {UserManagementService} from "../../../../shared/services/api/user-service/user-management.service";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
 import {MatDialog} from "@angular/material/dialog";
+import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-user-list',
@@ -25,11 +28,13 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class UserListComponent implements OnInit, OnDestroy {
   isLoadingUsers = true;
-  users: User[] = [];
-  displayedColumns = ['username', 'firstName', 'lastName', 'email'];
+  users: MatTableDataSource<User> = new MatTableDataSource();
+  displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'age'];
   usersSelected = false;
   private _usersUpdatedSubject: BehaviorSubject<null> = new BehaviorSubject<null>(null);
   private _unsubscribe: Subject<void> = new Subject<void>();
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private userService: UserManagementService,
@@ -43,7 +48,8 @@ export class UserListComponent implements OnInit, OnDestroy {
         return this.userService.getUsers().pipe(delay(500))
       }),
       tap((users: User[]) => {
-        this.users = users;
+        this.users = new MatTableDataSource(users);
+        this.users.sort = this.sort;
         this.isLoadingUsers = false
       }, () => {
         this.notificatonsService.error('Could not get users', {title: 'Server error'});

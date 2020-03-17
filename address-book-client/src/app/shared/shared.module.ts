@@ -20,6 +20,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatOptionModule} from "@angular/material/core";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatMenuModule,
     FlexLayoutModule,
     MatGridListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule
   ]
 })
 export class SharedModule {}
