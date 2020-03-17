@@ -1,4 +1,9 @@
-<h1 class="align-center">Add new contact</h1>
+<div fxLayoutAlign="center center">
+  <a [routerLink]="'/contacts'">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <h1> Add new contact </h1>
+</div>
 
 <mat-card class="form-card" [@flyInOut]>
   <form class="flex-column" [formGroup]="contactForm" (ngSubmit)="contactSubmit()">

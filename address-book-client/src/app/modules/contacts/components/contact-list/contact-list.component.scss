@@ -37,6 +37,10 @@
     //  }
     //}
   }
+
+  .margin-left-5 {
+    margin-left: 5px !important;  // to override material
+  }
 }
 
 //@keyframes move-in {   // keyframes animation move-in function (used for table rows)

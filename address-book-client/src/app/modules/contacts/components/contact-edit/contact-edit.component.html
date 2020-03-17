@@ -1,4 +1,10 @@
-<h1 class="align-center">Edit contact</h1>
+<div fxLayoutAlign="center center">
+  <a [routerLink]="'/contacts'">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <h1> Edit contact </h1>
+</div>
+
 <mat-card class="form-card" *ngIf="!isLoading">
   <mat-card-content>
     <form class="flex-column" [formGroup]="contactForm">
