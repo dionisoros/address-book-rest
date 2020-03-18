@@ -93,7 +93,7 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.signUp(this.signUpForm.value)
+    this.authService.signUp({...this.signUpForm.value, ...{createdAt: new Date()}})
       .subscribe((tokenResponse: TokenResponse) => {
         this.fadeIn = !this.fadeIn;
 

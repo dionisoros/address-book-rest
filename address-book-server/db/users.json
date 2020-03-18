@@ -2,3 +2,5 @@
 {"firstName":"firstNameTest","lastName":"lastNameTest","username":"usernametest","age":"90","email":"test@gmail.com","password":"password","_id":"zA9FLvaxSAdYuwke"}
 {"firstName":"nicoleta","lastName":"ilea","username":"nicoilea","email":"nico@gmail.com","age":"98","password":"nicoleta","createdAt":"2020-03-18T19:14:29.766Z","_id":"D9rf9RHSbr14HLFr"}
 {"firstName":"dio","lastName":null,"username":"usernametest2321a","email":"a@gmail.co","age":null,"password":"password","createdAt":"2020-03-18T19:15:18.259Z","_id":"CyeBOYnUNe5pLzN4"}
+{"firstName":"dio","lastName":"oros","username":"123123asfad","email":"a@yahoo.com","age":"23","password":"password","createdAt":"2020-03-18T19:23:22.752Z","_id":"VpaGk9BC21Z8hMAZ"}
+{"firstName":"Ana","lastName":"Oros","username":"anamariaoros","age":"23","email":"ana@gmail.com","password":"1234","createdAt":"2020-03-18T19:38:58.282Z","_id":"N81VVQWte9seuuX6"}
