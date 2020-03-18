@@ -9,7 +9,12 @@ import {NotificationsService} from "../../../../shared/services/common/notificat
 import {MatDialog} from "@angular/material/dialog";
 import {CustomConfirmDialogComponent} from "../../../../shared/components/custom-confirm-dialog/custom-confirm-dialog.component";
 import {DatePipe} from "@angular/common";
-import {emailValidation, nameValidation, whiteSpaces} from "../../../../shared/validators/patterns-validation";
+import {
+  emailValidation,
+  excludeNumbers,
+  nameValidation,
+  whiteSpaces
+} from "../../../../shared/utils/validators/patterns-validation";
 
 @Component({
   selector: 'app-contact-edit',
@@ -48,27 +53,28 @@ export class ContactEditComponent implements OnInit, OnDestroy {
     this.contactForm = this.formBuilder.group({
       firstName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(30),
+        Validators.maxLength(40),
         Validators.pattern(whiteSpaces)
       ])],
       country: [null, Validators.compose([
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(15),
-        Validators.pattern(whiteSpaces)
+        Validators.maxLength(100),
+        Validators.pattern(whiteSpaces),
+        Validators.pattern(excludeNumbers)
       ])],
       _id: [null, Validators.required],
       createdAt: [null, Validators.required],

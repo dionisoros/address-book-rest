@@ -9,7 +9,7 @@ import {
   emailValidation,
   nameValidation,
   whiteSpaces
-} from "../../../../shared/validators/patterns-validation";
+} from "../../../../shared/utils/validators/patterns-validation";
 
 @Component({
   selector: 'app-sign-in',
@@ -24,7 +24,6 @@ export class SignInComponent implements OnInit {
     username: new FormControl('', [Validators.compose([
       Validators.required,
       Validators.maxLength(30),
-      Validators.minLength(2),
       Validators.pattern(new RegExp("\\S"))
     ])]),
     password: new FormControl('', [Validators.compose([
@@ -49,19 +48,19 @@ export class SignInComponent implements OnInit {
   initSignUpForm(): FormGroup {
     return this.formBuilder.group({
       firstName: [null, Validators.compose([
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       username: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(whiteSpaces)
       ])],
       age: [null, Validators.compose([
@@ -73,13 +72,13 @@ export class SignInComponent implements OnInit {
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(30),
+        Validators.maxLength(40),
         Validators.pattern(whiteSpaces)
       ])],
       password: [null, Validators.compose([
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(30),
+        Validators.maxLength(100),
         Validators.pattern(whiteSpaces)
       ])]
     })

@@ -8,7 +8,11 @@ import {map, startWith} from "rxjs/operators";
 import {Contact} from "../../../../shared/models/contact/contact";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {DatePipe} from "@angular/common";
-import {emailValidation, nameValidation, whiteSpaces} from "../../../../shared/validators/patterns-validation";
+import {
+  emailValidation, excludeNumbers,
+  nameValidation,
+  whiteSpaces
+} from "../../../../shared/utils/validators/patterns-validation";
 
 @Component({
   selector: 'app-contact-add',
@@ -47,27 +51,28 @@ export class ContactAddComponent implements OnInit {
     this.contactForm = this.formBuilder.group({
       firstName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(30),
+        Validators.maxLength(40),
         Validators.pattern(whiteSpaces)
       ])],
       country: [null, Validators.compose([
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(15),
-        Validators.pattern(whiteSpaces)
+        Validators.maxLength(100),
+        Validators.pattern(whiteSpaces),
+        Validators.pattern(excludeNumbers)
       ])],
     });
 

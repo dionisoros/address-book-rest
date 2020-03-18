@@ -39,7 +39,7 @@
         </mat-option>
       </mat-autocomplete>
       <mat-error>
-        <span *ngIf="!contactForm.get('country').valid && contactForm.get('country').touched">Please select a country</span>
+        <span *ngIf="!contactForm.get('country').valid && contactForm.get('country').touched">Please select a valid country</span>
       </mat-error>
     </mat-form-field>
 

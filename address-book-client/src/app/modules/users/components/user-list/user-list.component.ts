@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {sortingHeaderByLowerCase} from "../../../../shared/utils/helper-functions/sorting-header-by-lower-case";
 
 @Component({
   selector: 'app-user-list',
@@ -51,6 +52,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.users = new MatTableDataSource(users);
         this.users.sort = this.sort;
         this.users.paginator = this.paginator;
+        this.users.sortingDataAccessor = (data: any, sortHeaderId: string) => sortingHeaderByLowerCase(data, sortHeaderId);
         this.isLoadingUsers = false
       }, () => {
         this.notificatonsService.error('Could not get users', {title: 'Server error'});

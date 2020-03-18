@@ -6,7 +6,7 @@ import {
   emailValidation,
   nameValidation,
   whiteSpaces
-} from "../../../../shared/validators/patterns-validation";
+} from "../../../../shared/utils/validators/patterns-validation";
 
 @Component({
   selector: 'app-user-dialog',
@@ -22,25 +22,25 @@ export class UserDialogComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.formBuilder.group({
       firstName: [null, Validators.compose([
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       username: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(30),
-        Validators.minLength(3),
+        Validators.maxLength(40),
+        Validators.minLength(2),
         Validators.pattern(whiteSpaces)
       ])],
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(30),
+        Validators.maxLength(40),
         Validators.pattern(whiteSpaces)
       ])],
       age: [null, Validators.compose([

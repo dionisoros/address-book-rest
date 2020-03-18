@@ -10,6 +10,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {MatPaginator} from "@angular/material/paginator";
 import {CustomConfirmDialogComponent} from "../../../../shared/components/custom-confirm-dialog/custom-confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {sortingHeaderByLowerCase} from "../../../../shared/utils/helper-functions/sorting-header-by-lower-case";
 
 @Component({
   selector: 'app-contact-list',
@@ -53,6 +54,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
         this.contacts = new MatTableDataSource(contacts);
         this.contacts.paginator = this.paginator;
         this.contacts.sort = this.sort;
+        this.contacts.sortingDataAccessor = (data: any, sortHeaderId: string) => sortingHeaderByLowerCase(data, sortHeaderId);
         this.isLoadingContacts = false;
       }, () => {
         this.notificationsService.error('Could not see contacts', {title: 'Server error'});
@@ -72,9 +74,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
       if (confirm) {
         this.contactsService.deleteContact(contact._id).subscribe(() => {
           this._contactListSubject$.next(true);
-          this.notificationsService.success(`${contact.firstName} was removed.`)
+          this.notificationsService.success(`${contact.firstName + ' ' + contact.lastName} was removed.`)
         }, () => {
-          this.notificationsService.error(`${contact.firstName} couldn't be removed`)
+          this.notificationsService.error(`${contact.firstName + ' ' + contact.lastName} couldn't be removed`)
         })
       }
     })

@@ -59,8 +59,8 @@
         <a mat-flat-button color="primary" [routerLink]="[contact._id]">
           <mat-icon>edit</mat-icon>
         </a>
-        <button mat-flat-button color="warn" class="margin-left-5">
-          <mat-icon (click)="removeContact(contact)">delete</mat-icon>
+        <button mat-flat-button class="margin-left-5" color="warn" (click)="removeContact(contact)">
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
