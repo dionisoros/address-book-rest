@@ -70,7 +70,6 @@ export class ContactEditComponent implements OnInit, OnDestroy {
         Validators.maxLength(15),
         Validators.pattern(whiteSpaces)
       ])],
-      country: [null, Validators.required],
       _id: [null, Validators.required],
       createdAt: [null, Validators.required],
       updatedAt: [null, Validators.required],
