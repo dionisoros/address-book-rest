@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
   initSignUpForm(): FormGroup {
     return this.formBuilder.group({
       firstName: [null, Validators.compose([
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.minLength(3),
         Validators.pattern(nameValidation)
       ])],
@@ -60,7 +60,7 @@ export class SignInComponent implements OnInit {
       ])],  // not necessary new FormControl() because is already!
       username: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.minLength(3),
         Validators.pattern(whiteSpaces)
       ])],
@@ -73,7 +73,7 @@ export class SignInComponent implements OnInit {
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.pattern(whiteSpaces)
       ])],
       password: [null, Validators.compose([

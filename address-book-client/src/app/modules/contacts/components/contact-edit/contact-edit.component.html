@@ -11,14 +11,14 @@
       <mat-form-field>
         <input matInput placeholder="First Name" formControlName="firstName">
         <mat-error>
-          <span *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').touched">First Name required</span>
+          <span *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').touched">First Name is not valid</span>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Last Name" formControlName="lastName">
         <mat-error>
-          <span *ngIf="!contactForm.get('lastName').valid && contactForm.get('lastName').touched">Last Name required</span>
+          <span *ngIf="!contactForm.get('lastName').valid && contactForm.get('lastName').touched">Last Name is not valid</span>
         </mat-error>
       </mat-form-field>
 
@@ -48,10 +48,10 @@
 
   <mat-card-actions>
     <div class="flex-row justify-content-end">
-      <button type="submit" (click)="editContact()" mat-flat-button color="primary">
+      <button type="submit" (click)="editContact()" [disabled]="!contactForm.valid" mat-flat-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
-      <button type="button" (click)="removeContact()" mat-flat-button color="warn">
+      <button type="button" (click)="removeContact()" [disabled]="!contactForm.valid" mat-flat-button color="warn">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

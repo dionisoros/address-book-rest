@@ -48,20 +48,20 @@ export class ContactEditComponent implements OnInit, OnDestroy {
     this.contactForm = this.formBuilder.group({
       firstName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.minLength(3),
         Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.minLength(3),
         Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(20),
+        Validators.maxLength(30),
         Validators.pattern(whiteSpaces)
       ])],
       country: [null, Validators.compose([
