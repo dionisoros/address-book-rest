@@ -11,7 +11,7 @@
 <mat-spinner *ngIf="isLoadingContacts"></mat-spinner>
 
 <div class="padding-30" [hidden]="!contacts.data.length">  <!-- hidden -> workaround -->
-  <mat-table [dataSource]="contacts" matSort [@fade]="'in'">
+  <mat-table [dataSource]="contacts" matSort [@fade]="'in'" matSortActive="createdAt" matSortDirection="desc" matSortDisableClear>
 
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>

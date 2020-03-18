@@ -30,7 +30,7 @@ import {sortingHeaderByLowerCase} from "../../../../shared/utils/helper-function
 export class UserListComponent implements OnInit, OnDestroy {
   isLoadingUsers = true;
   users: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'age'];
+  displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'age', 'createdAt'];
   usersSelected = false;
   private _usersUpdatedSubject: BehaviorSubject<null> = new BehaviorSubject<null>(null);
   private _unsubscribe: Subject<void> = new Subject<void>();
@@ -67,6 +67,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     addUserDialogaddUserDialog.afterClosed().pipe(
       switchMap((result: User) => {
         if (result) {
+          result.createdAt = new Date();
           return this.userService.postUser(result)
         }
       }),

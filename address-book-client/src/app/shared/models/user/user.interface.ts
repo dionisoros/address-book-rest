@@ -7,4 +7,5 @@ export interface UserResponseInterface {
   email: string;
   image: string;
   password: string
+  createdAt?: Date;
 }

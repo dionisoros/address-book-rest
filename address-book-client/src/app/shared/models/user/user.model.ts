@@ -9,6 +9,7 @@ export class User {
   public email: string;
   public image: string;
   public password: string;
+  public createdAt?: Date;
 
   constructor(data?: UserResponseInterface) {
 
@@ -24,6 +25,7 @@ export class User {
     this.email = data.email;
     this.image = data.image;
     this.password = data.password;
+    this.createdAt = data.createdAt && new Date(data.createdAt);
   }
 
 }
