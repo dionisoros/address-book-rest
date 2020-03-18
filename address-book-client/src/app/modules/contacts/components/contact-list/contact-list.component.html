@@ -11,7 +11,14 @@
 <mat-spinner *ngIf="isLoadingContacts"></mat-spinner>
 
 <div class="padding-30" [hidden]="!contacts.data.length">  <!-- hidden -> workaround -->
-  <mat-table [dataSource]="contacts" matSort [@fade]="'in'" matSortActive="createdAt" matSortDirection="desc" matSortDisableClear>
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <mat-form-field class="width-20">
+      <input matInput (keyup)="filterTable($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="contacts" matSort [@fade]="'in'" matSortActive="createdAt" matSortDirection="desc">
 
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
@@ -69,12 +76,10 @@
     <mat-row *matRowDef="let contact; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center"></mat-paginator>
-  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center" [disabled]="!contacts.filteredData.length"></mat-paginator>
 </div>
 
-<div class="padding-30 align-center" *ngIf="!contacts.data.length && !isLoadingContacts">
+<div class="padding-30 align-center" *ngIf="(!contacts.data.length && !isLoadingContacts) || (contacts.filter.length && !contacts.filteredData.length)">
   <mat-card>
     <p>No contacts found.</p>
   </mat-card>

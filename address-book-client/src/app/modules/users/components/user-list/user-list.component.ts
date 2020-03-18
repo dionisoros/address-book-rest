@@ -28,7 +28,7 @@ import {sortingHeaderByLowerCase} from "../../../../shared/utils/helper-function
   ]
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  isLoadingUsers = true;
+  isLoadingUsers: boolean;
   users: MatTableDataSource<User> = new MatTableDataSource();
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'age', 'createdAt'];
   usersSelected = false;
@@ -45,11 +45,12 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._usersUpdatedSubject.pipe(
+      tap(_ => this.isLoadingUsers = true),
       switchMap(() => {
         return this.userService.getUsers().pipe(delay(500))
       }),
       tap((users: User[]) => {
-        this.users = new MatTableDataSource(users);
+        this.users = new MatTableDataSource<User>(users);
         this.users.sort = this.sort;
         this.users.paginator = this.paginator;
         this.users.sortingDataAccessor = (data: any, sortHeaderId: string) => sortingHeaderByLowerCase(data, sortHeaderId);
@@ -77,6 +78,10 @@ export class UserListComponent implements OnInit, OnDestroy {
         this._usersUpdatedSubject.next(null);
       })
     ).subscribe()
+  }
+
+  filterTable (filterValue :string) {
+    this.users.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {

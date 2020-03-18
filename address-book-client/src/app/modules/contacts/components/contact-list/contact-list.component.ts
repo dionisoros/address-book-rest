@@ -51,7 +51,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
         return this.contactsService.getContacts()
       }),
       tap((contacts: Contact[]) => {
-        this.contacts = new MatTableDataSource(contacts);
+        this.contacts = new MatTableDataSource<Contact>(contacts);
         this.contacts.paginator = this.paginator;
         this.contacts.sort = this.sort;
         this.contacts.sortingDataAccessor = (data: any, sortHeaderId: string) => sortingHeaderByLowerCase(data, sortHeaderId);
@@ -80,6 +80,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
         })
       }
     })
+  }
+
+  filterTable (filterValue :string) {
+    this.contacts.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {

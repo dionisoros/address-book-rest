@@ -11,6 +11,13 @@
 <mat-spinner *ngIf="isLoadingUsers"></mat-spinner>
 
 <div class="padding-30" [hidden]="!users.data.length"> <!--hidden workaround -->
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <mat-form-field class="width-20">
+      <input matInput (keyup)="filterTable($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
   <mat-card>
     <table mat-table [dataSource]="users" matSort [@fade]="'in'" matSortActive="createdAt" matSortDirection="desc" matSortDisableClear>
 
@@ -49,18 +56,24 @@
           style="cursor: pointer"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center" [disabled]="!users.filteredData.length"></mat-paginator>
 
     <mat-card-actions></mat-card-actions>
   </mat-card>
 
-  <div *ngIf="!usersSelected && !isLoadingUsers">
+  <div *ngIf="!usersSelected && !isLoadingUsers && !((!users.data.length && !isLoadingUsers) || (users.filter.length && !users.filteredData.length))">
     <mat-card class='user-select-card'>
       <p>Select a user in order to see details</p>
     </mat-card>
   </div>
 
   <div style="margin-top: 2rem">
-    <router-outlet (activate)="usersSelected = true" (deactivate)="usersSelected = false" style="margin-top: 2rem"></router-outlet>
+    <router-outlet (activate)="usersSelected = true" (deactivate)="usersSelected = false"></router-outlet>
   </div>
+</div>
+
+<div class="padding-30 align-center" *ngIf="(!users.data.length && !isLoadingUsers) || (users.filter.length && !users.filteredData.length)">
+  <mat-card>
+    <p>No users found.</p>
+  </mat-card>
 </div>
