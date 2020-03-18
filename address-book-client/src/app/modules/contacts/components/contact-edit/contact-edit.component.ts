@@ -9,6 +9,7 @@ import {NotificationsService} from "../../../../shared/services/common/notificat
 import {MatDialog} from "@angular/material/dialog";
 import {CustomConfirmDialogComponent} from "../../../../shared/components/custom-confirm-dialog/custom-confirm-dialog.component";
 import {DatePipe} from "@angular/common";
+import {emailValidation, nameValidation, whiteSpaces} from "../../../../shared/validators/patterns-validation";
 
 @Component({
   selector: 'app-contact-edit',
@@ -45,19 +46,36 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   private populateContactForm(): void {
 
     this.contactForm = this.formBuilder.group({
-      'firstName': [null, Validators.required],
-      'lastName': [null, Validators.required],
-      'email': [null, Validators.compose([
+      firstName: [null, Validators.compose([
         Validators.required,
-        Validators.email,
-        Validators.maxLength(40),
+        Validators.maxLength(20),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation)
       ])],
-      'country': [null, Validators.required],
-      '_id': [null, Validators.required],
-      'createdAt': [null, Validators.required],
-      'updatedAt': [null, Validators.required],
-      'createdBy': [null, Validators.required],
-      'updatedBy': [null, Validators.required],
+      lastName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation),
+      ])],  // not necessary new FormControl() because is already!
+      email: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern(emailValidation),
+        Validators.maxLength(20),
+        Validators.pattern(whiteSpaces)
+      ])],
+      country: [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+        Validators.pattern(whiteSpaces)
+      ])],
+      country: [null, Validators.required],
+      _id: [null, Validators.required],
+      createdAt: [null, Validators.required],
+      updatedAt: [null, Validators.required],
+      createdBy: [null, Validators.required],
+      updatedBy: [null, Validators.required],
     });
 
     this.route.params.pipe(
