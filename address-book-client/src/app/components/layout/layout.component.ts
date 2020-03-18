@@ -10,6 +10,7 @@ import {NotificationsService} from "../../shared/services/common/notifications.s
 export class LayoutComponent {
 
   theme: string;
+  userLoggedIn: string = localStorage.getItem('userLoggedIn');
 
   constructor(private router: Router, private notificationService: NotificationsService) { }
 

@@ -3,7 +3,7 @@ import {ContactsService} from "../../../../shared/services/api/contacts-service/
 import {Contact} from "../../../../shared/models/contact/contact";
 import {BehaviorSubject, Subject} from "rxjs";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
-import {delay, switchMap, takeUntil, tap} from "rxjs/operators";
+import {switchMap, takeUntil, tap} from "rxjs/operators";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {animate, style, transition, trigger} from "@angular/animations";
@@ -47,7 +47,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this._contactListSubject$.pipe(
       tap(() => (this.isLoadingContacts = true)),
       switchMap(() => {
-        return this.contactsService.getContacts().pipe(delay(500))
+        return this.contactsService.getContacts()
       }),
       tap((contacts: Contact[]) => {
         this.contacts = new MatTableDataSource(contacts);

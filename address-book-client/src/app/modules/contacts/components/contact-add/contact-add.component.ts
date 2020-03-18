@@ -44,14 +44,29 @@ export class ContactAddComponent implements OnInit {
   ngOnInit(): void {
     this.countryList = this.contactsService.getCountries();
     this.contactForm = this.formBuilder.group({
-      'firstName': [null, Validators.required],
-      'lastName': [null, Validators.required],
+      'firstName': [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20),
+        Validators.pattern(new RegExp("\\S"))]
+      )],
+      'lastName': [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20),
+        Validators.pattern(new RegExp("\\S"))]
+      )],
       'email': [null, Validators.compose([
         Validators.required,
-        Validators.email,
-        Validators.maxLength(40),
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        Validators.maxLength(20),
       ])],
-      'country': [null, Validators.required],
+      'country': [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+        Validators.pattern(new RegExp("\\S"))]
+      )],
     });
 
     this.countryListFiltered = this.contactForm.get('country').valueChanges

@@ -10,14 +10,14 @@
     <mat-form-field>
       <input matInput placeholder="First Name" formControlName="firstName">
       <mat-error>
-        <span *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').touched">First Name required</span>
+        <span *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').touched">First Name is not valid</span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Last Name" formControlName="lastName">
       <mat-error>
-        <span *ngIf="!contactForm.get('lastName').valid && contactForm.get('lastName').touched">Last Name required</span>
+        <span *ngIf="!contactForm.get('lastName').valid && contactForm.get('lastName').touched">Last Name is not valid</span>
       </mat-error>
     </mat-form-field>
 

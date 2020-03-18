@@ -20,9 +20,14 @@
           <mat-radio-button value="my-theme-custom">purple
           </mat-radio-button>
         </mat-radio-group>
+
+        <button mat-button>
+          Hello, {{userLoggedIn || 'user'}}
+          <mat-icon>mood</mat-icon>
+        </button>
         <button mat-button (click)="signOut()">
           <mat-icon>exit_to_app</mat-icon>
-          Logout
+          Sign out
         </button>
       </div>
 

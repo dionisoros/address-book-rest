@@ -44,14 +44,6 @@ export class ApiService {
     );
   }
 
-  public patch<T>(url: string, body: any | null, options?: object | null): Observable<T> {
-    const pathUrl = this.buildPathUrl(url, options);
-    return this.http.patch<T>(pathUrl, body, options).pipe(
-      catchError((err): ObservableInput<T> => this.handleError(err)),
-      share()
-    );
-  }
-
   public delete<T>(url: string, options?: object | null): Observable<T> {
     const pathUrl = this.buildPathUrl(url, options);
     return this.http.delete<T>(pathUrl, options).pipe(

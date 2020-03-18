@@ -3,10 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService, TokenResponse} from "../../../../shared/services/api/auth-service/auth.service";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {map, switchMap, switchMapTo} from "rxjs/operators";
 import {UserManagementService} from "../../../../shared/services/api/user-service/user-management.service";
-import {empty} from "rxjs";
 
 @Component({
   selector: 'app-sign-in',
@@ -18,8 +15,16 @@ export class SignInComponent implements OnInit {
 
   signUpForm: FormGroup;
   signInObj = {
-    username: new FormControl('', [Validators.required, Validators.nullValidator]),
-    password: new FormControl('', [Validators.required, Validators.nullValidator])
+    username: new FormControl('', [Validators.compose([
+      Validators.required,
+      Validators.maxLength(30),
+      Validators.minLength(2),
+      Validators.pattern(new RegExp("\\S"))
+    ])]),
+    password: new FormControl('', [Validators.compose([
+      Validators.required,
+      Validators.maxLength(30),
+    ])])
   };
 
   constructor(
@@ -37,23 +42,39 @@ export class SignInComponent implements OnInit {
 
   initSignUpForm(): FormGroup {
     return this.formBuilder.group({
-      firstName: [null, Validators.maxLength(30)],
-      lastName: [null, Validators.maxLength(30)],  // not necessary new FormControl() because is already!
+      firstName: [null, Validators.compose([
+        Validators.maxLength(30),
+        Validators.minLength(2),
+        Validators.pattern(new RegExp("\\S"))
+      ])],
+      lastName: [null, Validators.compose([
+        Validators.maxLength(30),
+        Validators.minLength(2),
+        Validators.pattern(new RegExp("\\S"))
+      ])],  // not necessary new FormControl() because is already!
       username: [null, Validators.compose([
         Validators.required,
         Validators.maxLength(30),
+        Validators.minLength(2),
+        Validators.pattern(new RegExp("\\S"))
       ])],
       age: [null, Validators.compose([
-        Validators.maxLength(30),
+        Validators.minLength(1),
+        Validators.maxLength(3),
+        Validators.pattern(new RegExp("\\S")),
+        Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$")
       ])],
       email: [null, Validators.compose([
         Validators.required,
-        Validators.email,
-        Validators.maxLength(40),
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        Validators.maxLength(30),
+        Validators.pattern(new RegExp("\\S"))
       ])],
       password: [null, Validators.compose([
         Validators.required,
-        Validators.maxLength(40)
+        Validators.minLength(4),
+        Validators.maxLength(30),
+        Validators.pattern(new RegExp("\\S"))
       ])]
     })
   }
