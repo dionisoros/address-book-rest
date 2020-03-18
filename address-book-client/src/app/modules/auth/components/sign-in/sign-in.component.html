@@ -8,13 +8,13 @@
       <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <label>
-            <input matInput placeholder="FirstName" formControlName="firstName">
+            <input matInput placeholder="First Name" formControlName="firstName">
           </label>
           <mat-error *ngIf="signUpForm.get('firstName').touched && signUpForm.get('firstName').invalid">First Name is not valid</mat-error>
         </mat-form-field>
         <mat-form-field>
           <label>
-            <input matInput placeholder="LastName" formControlName="lastName">
+            <input matInput placeholder="Last Name" formControlName="lastName">
           </label>
           <mat-error *ngIf="signUpForm.get('lastName').touched && signUpForm.get('lastName').invalid">Last Name is not valid</mat-error>
         </mat-form-field>

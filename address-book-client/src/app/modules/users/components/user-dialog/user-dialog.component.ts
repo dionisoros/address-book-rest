@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../../../shared/models/user/user.model";
 import {MatDialogRef} from "@angular/material/dialog";
-
-// Have 2 inputs with some simple validation (like an email validation) without the require
-// of angular-forms and ngModel
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {
+  ageValidation,
+  emailValidation,
+  nameValidation,
+  whiteSpaces
+} from "../../../../shared/validators/patterns-validation";
 
 @Component({
   selector: 'app-user-dialog',
@@ -12,29 +15,54 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class UserDialogComponent implements OnInit {
 
-  user: User =  new User();
-  validEmail: boolean = true;
-  validAge: boolean = true;
+  userForm: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<UserDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<UserDialogComponent>, private formBuilder: FormBuilder) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userForm = this.formBuilder.group({
+      firstName: [null, Validators.compose([
+        Validators.maxLength(30),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation)
+      ])],
+      lastName: [null, Validators.compose([
+        Validators.maxLength(30),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation),
+      ])],  // not necessary new FormControl() because is already!
+      username: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.minLength(3),
+        Validators.pattern(whiteSpaces)
+      ])],
+      email: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern(emailValidation),
+        Validators.maxLength(30),
+        Validators.pattern(whiteSpaces)
+      ])],
+      age: [null, Validators.compose([
+        Validators.minLength(1),
+        Validators.maxLength(3),
+        Validators.pattern(whiteSpaces),
+        Validators.pattern(ageValidation)
+      ])],
+      password: [null, Validators.compose([
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(30),
+        Validators.pattern(whiteSpaces)
+      ])]
+    })
+  }
 
   close() {
     this.dialogRef.close();
   }
 
-  onEmailChange(value: string) { // custom validation (without material)
-    this.validEmail = RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/).test(value);
-    this.user.email = value;
-  }
-
-  onAgeChange(value: string) { // custom validation (without material)
-    this.validAge = RegExp(/^[1-9][0-9]*$/).test(value);
-    this.user.age = Number(value);
-  }
-
   save() {
-    this.dialogRef.close(this.user);
+    this.dialogRef.close(this.userForm.value);
   }
 }

@@ -50,6 +50,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       tap((users: User[]) => {
         this.users = new MatTableDataSource(users);
         this.users.sort = this.sort;
+        this.users.paginator = this.paginator;
         this.isLoadingUsers = false
       }, () => {
         this.notificatonsService.error('Could not get users', {title: 'Server error'});

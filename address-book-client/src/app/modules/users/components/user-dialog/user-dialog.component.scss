@@ -6,3 +6,15 @@
     font-size: $spacer-10;
   }
 }
+
+::ng-deep {
+  .mat-dialog-container {
+    width: 500px;
+
+    mat-form-field {
+      margin-top: $spacer-5;
+    }
+  }
+}
+
+

@@ -4,6 +4,12 @@ import {Router} from "@angular/router";
 import {AuthService, TokenResponse} from "../../../../shared/services/api/auth-service/auth.service";
 import {NotificationsService} from "../../../../shared/services/common/notifications.service";
 import {UserManagementService} from "../../../../shared/services/api/user-service/user-management.service";
+import {
+  ageValidation,
+  emailValidation,
+  nameValidation,
+  whiteSpaces
+} from "../../../../shared/validators/patterns-validation";
 
 @Component({
   selector: 'app-sign-in',
@@ -44,37 +50,37 @@ export class SignInComponent implements OnInit {
     return this.formBuilder.group({
       firstName: [null, Validators.compose([
         Validators.maxLength(30),
-        Validators.minLength(2),
-        Validators.pattern(new RegExp("\\S"))
+        Validators.minLength(3),
+        Validators.pattern(nameValidation)
       ])],
       lastName: [null, Validators.compose([
         Validators.maxLength(30),
-        Validators.minLength(2),
-        Validators.pattern(new RegExp("\\S"))
+        Validators.minLength(3),
+        Validators.pattern(nameValidation),
       ])],  // not necessary new FormControl() because is already!
       username: [null, Validators.compose([
         Validators.required,
         Validators.maxLength(30),
-        Validators.minLength(2),
-        Validators.pattern(new RegExp("\\S"))
+        Validators.minLength(3),
+        Validators.pattern(whiteSpaces)
       ])],
       age: [null, Validators.compose([
         Validators.minLength(1),
         Validators.maxLength(3),
-        Validators.pattern(new RegExp("\\S")),
-        Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$")
+        Validators.pattern(whiteSpaces),
+        Validators.pattern(ageValidation)
       ])],
       email: [null, Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        Validators.pattern(emailValidation),
         Validators.maxLength(30),
-        Validators.pattern(new RegExp("\\S"))
+        Validators.pattern(whiteSpaces)
       ])],
       password: [null, Validators.compose([
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(30),
-        Validators.pattern(new RegExp("\\S"))
+        Validators.pattern(whiteSpaces)
       ])]
     })
   }

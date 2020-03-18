@@ -65,7 +65,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   removeContact(contact: Contact) {
     const confirmDeleteDialog =  this.matDialog.open(CustomConfirmDialogComponent, {
       data: {
-        title: `Are you sure you want to delete ${contact.firstName}?`,
+        title: `Are you sure you want to delete ${contact.firstName + ' ' + contact.lastName}?`,
       }
     });
     confirmDeleteDialog.afterClosed().subscribe(confirm => {

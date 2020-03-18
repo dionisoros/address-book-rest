@@ -8,6 +8,7 @@ import {map, startWith} from "rxjs/operators";
 import {Contact} from "../../../../shared/models/contact/contact";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {DatePipe} from "@angular/common";
+import {emailValidation, nameValidation, whiteSpaces} from "../../../../shared/validators/patterns-validation";
 
 @Component({
   selector: 'app-contact-add',
@@ -44,29 +45,30 @@ export class ContactAddComponent implements OnInit {
   ngOnInit(): void {
     this.countryList = this.contactsService.getCountries();
     this.contactForm = this.formBuilder.group({
-      'firstName': [null, Validators.compose([
+      firstName: [null, Validators.compose([
         Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-        Validators.pattern(new RegExp("\\S"))]
-      )],
-      'lastName': [null, Validators.compose([
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-        Validators.pattern(new RegExp("\\S"))]
-      )],
-      'email': [null, Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        Validators.maxLength(20),
+        Validators.maxLength(30),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation)
       ])],
-      'country': [null, Validators.compose([
+      lastName: [null, Validators.compose([
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.minLength(3),
+        Validators.pattern(nameValidation),
+      ])],  // not necessary new FormControl() because is already!
+      email: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern(emailValidation),
+        Validators.maxLength(30),
+        Validators.pattern(whiteSpaces)
+      ])],
+      country: [null, Validators.compose([
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(15),
-        Validators.pattern(new RegExp("\\S"))]
-      )],
+        Validators.pattern(whiteSpaces)
+      ])],
     });
 
     this.countryListFiltered = this.contactForm.get('country').valueChanges
@@ -85,7 +87,7 @@ export class ContactAddComponent implements OnInit {
     };
     this.contactsService.postContact({...contactFormValue, ...contactAudit}).subscribe((contact: Contact) => {
       this.router.navigate(['/contacts']);
-      this.notificationsService.success(`${contact.firstName + contact.lastName} added.`)
+      this.notificationsService.success(`${contact.firstName + ' ' + contact.lastName} added.`)
     }, () => {
       this.notificationsService.error(`${contactFormValue.firstName} couldn't be added.`)
     })
