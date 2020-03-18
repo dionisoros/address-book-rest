@@ -40,7 +40,7 @@
           <label>
             <input matInput placeholder="Password" type="password" formControlName="password">
           </label>
-          <mat-error *ngIf="signUpForm.get('password').touched && signUpForm.get('password').invalid">Password is not valid (minimum 4 characters)</mat-error>
+          <mat-error *ngIf="signUpForm.get('password').touched && signUpForm.get('password').invalid">Invalid password (must be between 4-30 characters)</mat-error>
         </mat-form-field>
         <mat-card-actions>
           <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Sign up</button>

@@ -40,7 +40,7 @@ export class UserDialogComponent implements OnInit {
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(40),
+        Validators.maxLength(100),
         Validators.pattern(whiteSpaces)
       ])],
       age: [null, Validators.compose([

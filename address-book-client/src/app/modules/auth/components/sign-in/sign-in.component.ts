@@ -27,8 +27,7 @@ export class SignInComponent implements OnInit {
       Validators.pattern(new RegExp("\\S"))
     ])]),
     password: new FormControl('', [Validators.compose([
-      Validators.required,
-      Validators.maxLength(30),
+      Validators.required
     ])])
   };
 
@@ -72,13 +71,13 @@ export class SignInComponent implements OnInit {
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern(emailValidation),
-        Validators.maxLength(40),
+        Validators.maxLength(100),
         Validators.pattern(whiteSpaces)
       ])],
       password: [null, Validators.compose([
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(100),
+        Validators.maxLength(30),
         Validators.pattern(whiteSpaces)
       ])]
     })
