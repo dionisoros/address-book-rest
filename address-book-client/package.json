@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "npm run cypress:run",
+    "e2e": "$(npm bin)/cypress open",
     "cypress:open": "$(npm bin)/cypress open"
   },
   "private": true,
