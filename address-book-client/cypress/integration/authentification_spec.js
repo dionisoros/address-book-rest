@@ -14,9 +14,6 @@ describe('Testing the Sign-in/Sign-up page', () => {
     cy.contains('Hello, Friend!');
     cy.contains('Sign in');
     cy.contains('Sign up');
-    cy.get(LOGIN_USERNAME_INPUT).type(VALID_USERNAME);
-    cy.get(LOGIN_PASSWD_INPUT).type(VALID_PASSWORD);
-    cy.get('#signIn').click();
   });
 
   function validLogin() {
