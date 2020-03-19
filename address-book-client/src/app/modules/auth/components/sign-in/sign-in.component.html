@@ -55,21 +55,21 @@
       <h1>Sign in</h1>
       <mat-form-field>
         <label>
-          <input matInput placeholder="Username" [formControl]="signInObj.username" required>
+          <input matInput placeholder="Username" id="username" [formControl]="signInObj.username" required>
         </label>
         <mat-error *ngIf="signInObj.username.invalid">Username required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <label>
-          <input matInput placeholder="Password" type="password" [formControl]="signInObj.password" required>
+          <input matInput placeholder="Password" id="password" type="password" [formControl]="signInObj.password" required>
         </label>
         <mat-error *ngIf="signInObj.password.invalid">Password required</mat-error>
       </mat-form-field>
 
       <mat-card-actions>
         <button mat-raised-button [disabled]="signInObj.username.invalid || signInObj.password.invalid"
-                (click)="signIn()" color="primary">Sign in
+                (click)="signIn()" color="primary" id="signIn">Sign in
         </button>
       </mat-card-actions>
     </mat-card>
