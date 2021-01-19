@@ -49,6 +49,28 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+### Docker compose
+
+This is to be used for local DEV.  
+
+#### Start application in container
+
+In parent folder (address-book-rest) run:
+ 
+```bash
+docker-compose up -d --build
+```
+#### Stopping
+
+```
+docker-compose down
+```
+
+### Dockerfile
+
+The file is used for building a production image for the service. It contains commands for building a service container image that could be used in production env.
+
+
 ### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io) and [Jasmine](https://jasmine.github.io/).
