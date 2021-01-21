@@ -7,11 +7,9 @@ services:
       dockerfile: node.dockerfile
     ports:
       - "3001:3001"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
     volumes:
-      - ./address-book-server:/home/app/address-book-server
-      - /home/app/address-book-server/node_modules
+      - ./address-book-server:/node-server
+      - /node-server/node_modules
     networks:
       - nodeapp-network
 

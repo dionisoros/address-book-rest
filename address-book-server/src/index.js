@@ -37,5 +37,5 @@ app
     .use(protectedApiRouter.routes())
     .use(protectedApiRouter.allowedMethods());
 
-app.listen(3000);
-console.log('koa-server started on port 3000');
+app.listen(3001);
+console.log('koa-server started on port 3001');
