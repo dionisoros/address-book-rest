@@ -73,9 +73,9 @@ The file is used for building a production image for the service. It contains co
    - `cd address-book-client`
    - FE build (see how Front-end looks like in production)
     
-    docker build -t angular-9-app .
+    build image: docker build -t angular-9-app .
     
-    docker run --name ng-app-container -d -p 8080:80 angular-9-app
+    run the docker container: docker run --name ng-app-container -d -p 8080:80 angular-9-app
     
    - go to localhost:8080
 
