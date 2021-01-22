@@ -1,21 +1,24 @@
-# Stage 1
-FROM node:10-alpine as build-step
-
-RUN mkdir -p /ng-app
+FROM tiangolo/node-frontend:10 as build-stage
 
 WORKDIR /ng-app
 
-COPY package*.json /ng-app/
+COPY package.json package-lock.json /ng-app/
 
-RUN npm install
+RUN npm ci
 
-COPY . /ng-app
+ENV PATH="./node_modules/.bin:$PATH"
 
-RUN npm run build --prod
+COPY . /ng-app/
 
-# Stage 2
-FROM nginx:1.17.1-alpine
+RUN npm run build:prod
 
-COPY --from=build-step /ng-app/dist/address-book-client /usr/share/nginx/html
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:1.15
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=build-stage /ng-app/dist/address-book-client/ /usr/share/nginx/html
+
+# Copy the default nginx.conf provided by tiangolo/node-frontend
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
