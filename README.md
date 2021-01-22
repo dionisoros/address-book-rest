@@ -49,7 +49,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Docker compose
+### Docker compose - for dev environment
 
 This is to be used for local DEV.  
 
@@ -70,6 +70,14 @@ docker-compose down
 
 The file is used for building a production image for the service. It contains commands for building a service container image that could be used in production env.
 
+   - `cd address-book-client`
+   - FE build (see how Front-end looks like in production)
+    
+    docker build -t angular-9-app .
+    
+    docker run --name ng-app-container -d -p 8080:80 angular-9-app
+    
+   - go to localhost:8080
 
 ### Running unit tests
 
